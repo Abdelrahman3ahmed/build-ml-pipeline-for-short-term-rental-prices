@@ -31,6 +31,10 @@ def go(args):
     # Save the cleaned data to a CSV file
     clean_filename = "clean_sample.csv"
     logger.info(f"Saving cleaned data to {clean_filename}")
+
+    idx = df['longitude'].between(-74.25, -73.50) & df['latitude'].between(40.5, 41.2)
+    df = df[idx].copy()
+
     df.to_csv(clean_filename, index=False)
 
     # Create a new artifact and upload it to W&B
